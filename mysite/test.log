@@ -1,0 +1,12 @@
+starting jobs!
+environment info: None
+INFO:     Started server process [35649]
+Started server process [35649]
+INFO:     Waiting for application startup.
+Waiting for application startup.
+INFO:     ASGI 'lifespan' protocol appears unsupported.
+ASGI 'lifespan' protocol appears unsupported.
+INFO:     Application startup complete.
+Application startup complete.
+INFO:     Uvicorn running on unix socket /tmp/uvicorn.sock (Press CTRL+C to quit)
+Uvicorn running on unix socket /tmp/uvicorn.sock (Press CTRL+C to quit)

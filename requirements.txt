@@ -1,0 +1,16 @@
+django
+django-rest-framework
+django-extensions
+django-cors-headers
+django-restql
+requests
+pandas
+git+https://github.com/sako0938/lnd_pyshell.git
+PyQRCode
+pypng
+schedule
+uvicorn
+gunicorn
+pillow
+websocket
+whitenoise

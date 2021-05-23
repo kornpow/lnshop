@@ -1,0 +1,4 @@
+env/*
+mysite/static/*
+*/__pycache__/*
+mysite/media/*
