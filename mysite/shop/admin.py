@@ -16,6 +16,7 @@ class OrderAdmin(admin.ModelAdmin):
 		newpaid = 0
 		for i in queryset:
 			pr = i.payment_request
+			# TODO: MIGRATE
 			rhash = decodePR(pr)['payment_hash']
 			paid = lookupInvoice(rhash)['settled']
 			if paid:
