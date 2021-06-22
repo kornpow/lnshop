@@ -22,21 +22,6 @@ from django_filters import rest_framework as filters
 from django_filters.rest_framework import DjangoFilterBackend
 from django.views.generic import DetailView
 
-
-# async def websocket_view(socket: WebSocket):
-# 	await socket.accept()
-# 	while True:
-# 		message = await socket.receive_text()
-# 		await socket.send_text(message)
-
-
-# class BorrowedFilterSet(filters.FilterSet):
-#    missing = filters.UUIDFilterfield_name='order_id', lookup_expr='exact')
-
-#    class Meta:
-#        model = Order
-#        fields = ['order_id']
-
 class ActionBasedPermission(AllowAny):
 	"""
 	Grant or deny access to a view, based on a mapping in view.action_permissions

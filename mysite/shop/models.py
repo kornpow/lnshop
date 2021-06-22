@@ -1,8 +1,10 @@
 from django.db import models
 import uuid
-from lnd_pyshell.lnd_rest import *
+from lnpanda import lnpanda
 from datetime import datetime
+import requests
 
+ln = lnpanda()
 
 class Product(models.Model):
 	name = models.CharField(max_length=200)
@@ -45,7 +47,9 @@ class Order(models.Model):
 		return sats
 
 	def get_invoice(self,sats,invoice_string):
-		result = addInvoice(sats,f'ChaosNCoffee \n {invoice_string}')['payment_request']
+		# result = addInvoice(sats,f'ChaosNCoffee \n {invoice_string}')['payment_request']
+		# TODO: MIGRATE
+		result = ln.lnd.add_invoice(value=sats, memo=f'ChaosNCoffee \n {invoice_string}').payment_request
 		return result
 
 	def get_order_amt(self):
@@ -61,7 +65,7 @@ class Order(models.Model):
 			self.sats_per_dollar = self.get_btc_price()
 			# order_dollars = self.get_order_amt()
 			print("Generating a payment request!")
-			# self.payment_request = self.get_invoice(self.sats_per_dollar)
+			self.payment_request = self.get_invoice(self.sats_per_dollar, 'test_shop')
 		else:
 			print("Payment request already exists!")
 		print(self.payment_request)

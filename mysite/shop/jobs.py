@@ -23,8 +23,10 @@ def checkInvoices():
 	newpaid = 0
 	for aorder in neworders:
 		pr = aorder.payment_request
-		rhash = decodePR(pr)['payment_hash']
-		checkpaid = lookupInvoice(rhash)['settled']
+		# rhash = decodePR(pr)['payment_hash']
+		# TODO: MIGRATE
+		rhash = ln.lnd.decode_payment_request.payment_hash
+		checkpaid = ln.subscribe_single_invoice(r_hash=bytes.fromhex(r_hash_str)).status
 		# Update if unpaid order is now paid
 		if checkpaid:
 			newpaid += 1

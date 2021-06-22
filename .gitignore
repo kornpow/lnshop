@@ -2,3 +2,5 @@ env/*
 mysite/static/*
 */__pycache__/*
 mysite/media/*
+mysite/shop/migrations/__pycache__/*
+**/*.pyc
