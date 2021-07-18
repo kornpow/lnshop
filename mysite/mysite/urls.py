@@ -22,13 +22,15 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.views.static import serve
 from django.conf.urls import url
-# from websocket.urls import websocket
+
+from rest_framework import permissions
+
+from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 
 
 router = routers.DefaultRouter()
 router.register(r'products', views.ProductViewSet)
 router.register(r'orders', views.OrderViewSet)
-# router.register(r'orders/(?P<order_id>.+)/$', views.OrderViewSet)
 
 router.register(r'orderitems', views.OrderItemViewSet)
 
@@ -36,18 +38,15 @@ urlpatterns = [
 	path('shop/', include('shop.urls')),
 	path('admin/', admin.site.urls),
 	path('', include(router.urls)),
-	# path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
+    path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
+    # Optional UI:
+    path('api/schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    path('api/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
 
     # api
-    # url(r'^api/v1/posts/$', views.PostCollection.as_view()),
-    # url(r'^api/v1/posts/(?P<pk>[0-9]+)/$', views.PostMember.as_view())
-    # url(r'^order/status/$', views.CheckOrderStatus.as_view()),
 	path(r'orders/<order_id>', views.CheckOrderDetailView.as_view(), name='order-detail'),
-    # url(r'^api/v1/posts/(?P<pk>[0-9]+)/$', views.PostMember.as_view())
 
-	# WEB SOCKETS?
-	# websocket("ws/", views.websocket_view)
 	re_path(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}), 
 	re_path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}), 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

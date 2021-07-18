@@ -59,16 +59,6 @@ class OrderViewSet(viewsets.ModelViewSet):
 		IsAdminUser: ['update', 'partial_update', 'destroy', 'create', 'retrieve','list',],
 		AllowAny: ['retrieve']
 	}
-	# filter_backends = [DjangoFilterBackend]
-	# filterset_fields = ('order_id')
-
-	# def get_queryset(self):
-	# 	queryset = self.queryset
-	# 	oid = self.request.query_params.get('order_id', None)
-	# 	print(oid)
-	# 	if oid is not None:
-	# 		queryset = queryset.filter(order_id=oid)
-	# 	return query_set
 
 
 class OrderItemViewSet(viewsets.ModelViewSet):
@@ -95,9 +85,6 @@ def qrcode(request):
 	# qrhtml = f'<img src="data:image/png;base64, {image_as_str}">'
 		return HttpResponse(virtual_file.getvalue(),content_type="image/png")
 
-
-
-
 class CheckOrderStatus(generics.ListAPIView):
     serializer_class = OrderSerializer
 
@@ -118,12 +105,3 @@ class CheckOrderDetailView(generics.RetrieveAPIView):
 	slug_field = "order_id"
 	# lookup_field = "order_id"
 	slug_url_kwarg = "order_id"
-
-	# def get_object(self):
-	# 	obj = super().get_object()
-	# 	# Record the last accessed date
-	# 	# obj.last_accessed = timezone.now()
-	# 	print(obj)
-	# 	obj.save()
-	# 	return obj
-		
